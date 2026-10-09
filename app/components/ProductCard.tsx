@@ -1,37 +1,47 @@
 import Image from "next/image";
+import Link from "next/link";
 import type { Product } from "@/lib/data/products";
 import { ProductCarousel } from "./ProductCarousel";
 
-export function ProductCard({ product }: { product: Product }) {
-  const hasCarousel = product.images && product.images.length > 1;
+type ProductCardProps = {
+  product: Product;
+};
+
+export function ProductCard({ product }: ProductCardProps) {
+  const hasMultipleImages = product.images && product.images.length > 1;
 
   return (
-    <article className="flex flex-col overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-sm transition-shadow hover:shadow-md">
-      <div className="relative flex aspect-[4/3] w-full items-center justify-center overflow-hidden bg-white">
-        {hasCarousel ? (
+    <div className="group bg-sf-card border border-sf-border rounded-2xl overflow-hidden hover:-translate-y-2 hover:shadow-2xl hover:border-sf-accent transition-all duration-300 flex flex-col">
+      <div className="relative h-60 overflow-hidden bg-sf-primary">
+        {hasMultipleImages ? (
           <ProductCarousel images={product.images!} alt={product.alt} />
         ) : (
           <Image
             src={product.image}
             alt={product.alt}
-            width={600}
-            height={400}
-            className="h-full w-full object-contain p-2"
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+            fill
+            sizes="(max-width: 768px) 100vw, 25vw"
+            className="object-cover group-hover:scale-105 transition-transform duration-500"
           />
         )}
       </div>
-      <div className="flex flex-1 flex-col p-5">
-        <h3 className="text-base font-semibold text-zinc-900">
+
+      <div className="p-6 flex flex-col flex-grow">
+        <h3 className="text-xl font-bold text-sf-primary mb-3">
           {product.name}
         </h3>
-        <p className="mt-2 flex-1 text-sm leading-6 text-zinc-600">
+        <p className="text-sf-text-muted text-sm leading-relaxed mb-6 flex-grow">
           {product.description}
         </p>
-        <p className="mt-4 text-sm font-medium text-zinc-400">
-          Consultar sin compromiso
-        </p>
+        <Link
+          href="/catalogo"
+          className="text-sf-accent font-semibold text-sm inline-flex items-center gap-2 hover:gap-4 transition-all"
+        >
+          Consultar sin compromiso →
+        </Link>
       </div>
-    </article>
+    </div>
   );
 }
+
+export default ProductCard;

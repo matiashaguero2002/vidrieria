@@ -1,5 +1,5 @@
+import { ProjectCard } from "../components/ProjectCard";
 import { projects } from "@/lib/data/projects";
-import { ProjectCard } from "@/app/components/ProjectCard";
 
 export const metadata = {
   title: "Proyectos | SF Aberturas",
@@ -9,28 +9,25 @@ export const metadata = {
 
 export default function ProyectosPage() {
   return (
-    <div className="bg-white">
-      <section className="border-b border-zinc-200 bg-zinc-50">
-        <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold tracking-tight text-zinc-900 sm:text-4xl">
-            Proyectos
+    <div className="pt-32 pb-24">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-sf-primary mb-4">
+            Proyectos <span className="text-sf-accent">realizados</span>
           </h1>
-          <p className="mt-3 max-w-2xl text-base leading-7 text-zinc-600">
-            Galería de trabajos finalizados. Cada proyecto incluye imagen
-            principal, descripción y ubicación. Tocá para ver el detalle.
+          <div className="w-16 h-1 bg-sf-accent mx-auto rounded-full mb-6" />
+          <p className="text-sf-text-muted max-w-2xl mx-auto text-lg">
+            Algunos de nuestros trabajos finalizados en Encarnación y
+            alrededores.
           </p>
         </div>
-      </section>
 
-      <section className="py-12 sm:py-16">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {projects.map((project, idx) => (
-              <ProjectCard key={project.id} project={project} priority={idx === 0} />
-            ))}
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
+          {projects.map((p, i) => (
+            <ProjectCard key={p.id} project={p} priority={i < 3} />
+          ))}
         </div>
-      </section>
+      </div>
     </div>
   );
 }

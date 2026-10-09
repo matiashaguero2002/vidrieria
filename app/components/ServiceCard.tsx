@@ -1,62 +1,87 @@
+import type { ReactNode } from "react";
 import type { Service } from "@/lib/data/services";
 
-function ServiceIcon({ name }: { name: Service["icon"] }) {
-  const common = {
-    width: 20,
-    height: 20,
-    viewBox: "0 0 24 24",
-    fill: "none",
-    stroke: "currentColor",
-    strokeWidth: 2 as const,
-  };
-
-  if (name === "factory") {
-    return (
-      <svg {...common} aria-hidden="true">
-        <path d="M3 21h18" />
-        <path d="M3 7v14" />
-        <path d="M6 7V5a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v2" />
-        <path d="M14 7h7v14H10V11a1 1 0 0 1 1-1h3" />
-        <path d="M6 10h2" />
-        <path d="M6 14h2" />
-        <path d="M14 14h2" />
-        <path d="M14 18h2" />
-      </svg>
-    );
-  }
-  if (name === "wrench") {
-    return (
-      <svg {...common} aria-hidden="true">
-        <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
-      </svg>
-    );
-  }
-  if (name === "message") {
-    return (
-      <svg {...common} aria-hidden="true">
-        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
-      </svg>
-    );
-  }
-  return (
-    <svg {...common} aria-hidden="true">
-      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" />
+const iconMap: Record<string, ReactNode> = {
+  factory: (
+    <svg
+      className="w-7 h-7"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2}
+      viewBox="0 0 24 24"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M3 21V9l6 4V9l6 4V9l6 4v8M3 21h18"
+      />
     </svg>
-  );
-}
+  ),
+  wrench: (
+    <svg
+      className="w-7 h-7"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2}
+      viewBox="0 0 24 24"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M14.7 6.3a4 4 0 0 0 5 5l-9 9a2.8 2.8 0 0 1-4-4l9-9Z"
+      />
+    </svg>
+  ),
+  message: (
+    <svg
+      className="w-7 h-7"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2}
+      viewBox="0 0 24 24"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M21 12a8 8 0 1 1-3.5 6.6L3 21l2.4-6A8 8 0 0 1 21 12Z"
+      />
+    </svg>
+  ),
+  shield: (
+    <svg
+      className="w-7 h-7"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2}
+      viewBox="0 0 24 24"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3Z"
+      />
+    </svg>
+  ),
+};
 
-export function ServiceCard({ service }: { service: Service }) {
+type ServiceCardProps = {
+  service: Service;
+};
+
+export function ServiceCard({ service }: ServiceCardProps) {
   return (
-    <article className="flex flex-col rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm transition-shadow hover:shadow-md">
-      <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-zinc-900 text-white">
-        <ServiceIcon name={service.icon} />
+    <div className="group bg-sf-card border border-sf-border rounded-2xl p-8 text-center hover:-translate-y-1 hover:shadow-2xl hover:border-sf-accent transition-all duration-300">
+      <div className="w-16 h-16 mx-auto mb-6 bg-sf-primary group-hover:bg-sf-accent rounded-2xl flex items-center justify-center text-white transition-colors">
+        {iconMap[service.icon] ?? iconMap.factory}
       </div>
-      <h3 className="mt-4 text-base font-semibold text-zinc-900">
+      <h4 className="text-lg font-bold text-sf-primary mb-3">
         {service.title}
-      </h3>
-      <p className="mt-2 text-sm leading-6 text-zinc-600">
+      </h4>
+      <p className="text-sf-text-muted text-sm leading-relaxed">
         {service.description}
       </p>
-    </article>
+    </div>
   );
 }
+
+export default ServiceCard;

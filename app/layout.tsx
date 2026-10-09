@@ -1,36 +1,37 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, Playfair_Display } from "next/font/google";
+import { Header } from "./components/Header";
+import { Footer } from "./components/Footer";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
   subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const playfair = Playfair_Display({
   subsets: ["latin"],
+  variable: "--font-playfair",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "SF Aberturas — Aberturas de Aluminio y Vidrio",
+  title: "SF Aberturas | Aluminio y Vidrio",
   description:
-    "SF Aberturas fabrica e instala aberturas de aluminio, puertas, ventanas, mamparas y cerramientos en Paraguay. Calidad, confianza y asesoramiento profesional en Encarnación.",
+    "Fabricación e instalación de aberturas de aluminio y vidrio en Encarnación, Paraguay.",
 };
 
-import { Footer } from "./components/Footer";
-import { Header } from "./components/Header";
-
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html
-      lang="es"
-      data-scroll-behavior="smooth"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col bg-white text-zinc-900 antialiased">
+    <html lang="es" className={`${inter.variable} ${playfair.variable}`}>
+      <body className="font-sans antialiased">
         <Header />
-        <main className="flex-1">{children}</main>
+        <main>{children}</main>
         <Footer />
       </body>
     </html>

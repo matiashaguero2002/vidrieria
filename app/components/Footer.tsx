@@ -1,149 +1,105 @@
 import Link from "next/link";
+import { contact } from "@/lib/data/contact";
+
+const navItems = [
+  { label: "Inicio", href: "/" },
+  { label: "Catálogo", href: "/catalogo" },
+  { label: "Proyectos", href: "/proyectos" },
+  { label: "Nosotros", href: "/nosotros" },
+  { label: "Pedir presupuesto", href: "/presupuesto" },
+];
 
 export function Footer() {
-  const year = new Date().getFullYear();
-
   return (
-    <footer className="border-t border-zinc-200 bg-white">
-      <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+    <footer className="bg-sf-primary text-white/75 pt-16 pb-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           <div>
-            <Link
-              href="/"
-              className="flex items-center gap-2 text-base font-bold tracking-tight text-zinc-900"
-            >
-              <span className="flex h-8 w-8 items-center justify-center rounded bg-zinc-900 text-sm font-bold text-white">
-                SF
-              </span>
-              SF Aberturas
-            </Link>
-            <p className="mt-3 max-w-xs text-sm leading-6 text-zinc-600">
-              Instalación de aberturas de aluminio y vidrio en Paraguay. Calidad
-              y confianza para tu hogar o empresa.
-            </p>
-          </div>
-
-          <div>
-            <h3 className="text-sm font-semibold text-zinc-900">Contacto</h3>
-            <ul className="mt-3 space-y-2 text-sm text-zinc-600">
-              <li>
-                <a href="tel:+595981000000" className="hover:text-zinc-900">
-                  +595 981 000 000
-                </a>
-              </li>
-              <li>
-                <a
-                  href="mailto:contacto@sfaberturas.com.py"
-                  className="hover:text-zinc-900"
-                >
-                  contacto@sfaberturas.com.py
-                </a>
-              </li>
-              <li>Encarnación, Paraguay</li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="text-sm font-semibold text-zinc-900">Navegación</h3>
-            <ul className="mt-3 space-y-2 text-sm text-zinc-600">
-              <li>
-                <Link href="/" className="hover:text-zinc-900">
-                  Inicio
-                </Link>
-              </li>
-              <li>
-                <Link href="/catalogo" className="hover:text-zinc-900">
-                  Catálogo
-                </Link>
-              </li>
-              <li>
-                <Link href="/proyectos" className="hover:text-zinc-900">
-                  Proyectos
-                </Link>
-              </li>
-              <li>
-                <Link href="/nosotros" className="hover:text-zinc-900">
-                  Nosotros
-                </Link>
-              </li>
-              <li>
-                <Link href="/presupuesto" className="hover:text-zinc-900">
-                  Pedir presupuesto
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="text-sm font-semibold text-zinc-900">
-              Redes sociales
-            </h3>
-            <p className="mt-3 text-sm text-zinc-600">
-              Seguinos en nuestras redes (placeholders).
-            </p>
-            <div className="mt-3 flex gap-3">
-              <a
-                href="#"
-                aria-label="Instagram SF Aberturas (placeholder)"
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-zinc-200 text-zinc-600 hover:bg-zinc-50 hover:text-zinc-900"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  aria-hidden="true"
-                >
-                  <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
-                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-                  <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
-                </svg>
-              </a>
-              <a
-                href="#"
-                aria-label="Facebook SF Aberturas (placeholder)"
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-zinc-200 text-zinc-600 hover:bg-zinc-50 hover:text-zinc-900"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  aria-hidden="true"
-                >
-                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
-                </svg>
-              </a>
-              <a
-                href="#"
-                aria-label="WhatsApp SF Aberturas (placeholder)"
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-zinc-200 text-zinc-600 hover:bg-zinc-50 hover:text-zinc-900"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  aria-hidden="true"
-                >
-                  <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
-                </svg>
-              </a>
+            <div className="flex items-center gap-1 text-2xl font-extrabold mb-4">
+              <span className="text-white">SF</span>
+              <span className="text-red-400">Aberturas</span>
             </div>
+            <p className="text-sm leading-relaxed mb-6">
+              Instalación de aberturas de aluminio y vidrio en Paraguay.
+              Calidad y confianza para tu hogar o empresa.
+            </p>
+            <div className="flex gap-3">
+              {["instagram", "facebook-f", "whatsapp"].map((s) => (
+                <a
+                  key={s}
+                  href="#"
+                  className="w-10 h-10 rounded-xl bg-white/10 hover:bg-sf-accent flex items-center justify-center transition-colors"
+                  aria-label={s}
+                >
+                  <i className={`fab fa-${s}`} />
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <h5 className="text-white font-bold mb-6 pb-3 border-b-2 border-sf-accent inline-block">
+              Contacto
+            </h5>
+            <ul className="space-y-4 text-sm">
+              <li className="flex items-start gap-3">
+                <i className="fas fa-phone text-sf-accent mt-1" />
+                <span>{contact.phone}</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <i className="fas fa-envelope text-sf-accent mt-1" />
+                <span>{contact.email}</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <i className="fas fa-map-marker-alt text-sf-accent mt-1" />
+                <span>{contact.address}</span>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h5 className="text-white font-bold mb-6 pb-3 border-b-2 border-sf-accent inline-block">
+              Navegación
+            </h5>
+            <ul className="space-y-3 text-sm">
+              {navItems.map((item) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    className="hover:text-sf-accent hover:pl-1 transition-all"
+                  >
+                    → {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h5 className="text-white font-bold mb-6 pb-3 border-b-2 border-sf-accent inline-block">
+              Horarios de atención
+            </h5>
+            <ul className="space-y-3 text-sm mb-6">
+              {contact.hours.map((h) => (
+                <li key={h.days} className="flex items-start gap-3">
+                  <i className="fas fa-clock text-sf-accent mt-1" />
+                  <span>
+                    {h.days}: {h.time}
+                  </span>
+                </li>
+              ))}
+            </ul>
+            <Link
+              href="/presupuesto"
+              className="block text-center bg-sf-accent hover:bg-sf-accent-hover text-white font-semibold px-6 py-3 rounded-xl transition-colors"
+            >
+              Solicitar presupuesto
+            </Link>
           </div>
         </div>
 
-        <div className="mt-10 border-t border-zinc-200 pt-6 text-center text-sm text-zinc-500 sm:text-left">
-          <p>© {year} SF Aberturas. Todos los derechos reservados.</p>
+        <div className="border-t border-white/10 mt-12 pt-8 text-center text-xs text-white/40">
+          © 2025 SF Aberturas. Todos los derechos reservados.
         </div>
       </div>
     </footer>
