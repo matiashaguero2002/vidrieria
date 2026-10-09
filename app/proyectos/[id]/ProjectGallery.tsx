@@ -42,6 +42,7 @@ export function ProjectGallery({ images, alt }: { images: string[]; alt: string 
           onClose={() => setOpen(false)}
           onPrev={() => setIdx((v) => (v - 1 + images.length) % images.length)}
           onNext={() => setIdx((v) => (v + 1) % images.length)}
+          onSelect={setIdx}
         />
       )}
     </>

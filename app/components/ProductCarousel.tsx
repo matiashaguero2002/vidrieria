@@ -78,6 +78,7 @@ export function ProductCarousel({
             setLightboxIndex((v) => (v - 1 + images.length) % images.length)
           }
           onNext={() => setLightboxIndex((v) => (v + 1) % images.length)}
+          onSelect={setLightboxIndex}
         />
       )}
     </>

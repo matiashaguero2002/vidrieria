@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SF Aberturas | Aluminio y Vidrio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --sf-bg: #FAF9F7;
+            --sf-primary: #1E293B;
+            --sf-primary-light: #334155;
+            --sf-accent: #2563EB;
+            --sf-accent-hover: #1D4ED8;
+            --sf-text: #333333;
+            --sf-text-muted: #64748B;
+            --sf-border: #E2E8F0;
+            --sf-card-bg: #FFFFFF;
+            --sf-yellow: #FCD34D;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--sf-text);
+            background-color: var(--sf-bg);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        /* --- Header --- */
+        .navbar {
+            background-color: var(--sf-bg);
+            border-bottom: 1px solid var(--sf-border);
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+        .navbar-brand {
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: var(--sf-primary) !important;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .navbar-brand .brand-sf { color: var(--sf-primary); }
+        .navbar-brand .brand-aberturas { color: #B91C1C; }
+        .nav-link {
+            font-weight: 500;
+            color: var(--sf-text) !important;
+            margin: 0 0.5rem;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover { color: var(--sf-accent) !important; }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background-color: var(--sf-accent);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after { width: 100%; }
+        .btn-sf-primary {
+            background-color: var(--sf-primary);
+            color: white;
+            font-weight: 600;
+            padding: 0.6rem 1.5rem;
+            border-radius: 12px;
+            border: 2px solid var(--sf-primary);
+            transition: all 0.3s ease;
+        }
+        .btn-sf-primary:hover {
+            background-color: var(--sf-primary-light);
+            border-color: var(--sf-primary-light);
+            color: white;
+        }
+        .btn-sf-accent {
+            background-color: var(--sf-accent);
+            color: white;
+            font-weight: 600;
+            padding: 0.6rem 1.5rem;
+            border-radius: 12px;
+            border: 2px solid var(--sf-accent);
+            transition: all 0.3s ease;
+        }
+        .btn-sf-accent:hover {
+            background-color: var(--sf-accent-hover);
+            border-color: var(--sf-accent-hover);
+            color: white;
+        }
+        .btn-sf-outline-light {
+            background-color: transparent;
+            color: white;
+            font-weight: 600;
+            padding: 0.6rem 1.5rem;
+            border-radius: 12px;
+            border: 2px solid rgba(255,255,255,0.7);
+            transition: all 0.3s ease;
+        }
+        .btn-sf-outline-light:hover {
+            background-color: white;
+            color: var(--sf-primary);
+            border-color: white;
+        }
+        .btn-sf-outline {
+            background-color: transparent;
+            color: var(--sf-primary);
+            font-weight: 600;
+            padding: 0.6rem 1.5rem;
+            border-radius: 12px;
+            border: 2px solid var(--sf-primary);
+            transition: all 0.3s ease;
+        }
+        .btn-sf-outline:hover {
+            background-color: var(--sf-primary);
+            color: white;
+        }
+
+        /* --- Hero con imagen de fondo --- */
+        .hero {
+            position: relative;
+            padding: 10rem 0 8rem;
+            overflow: hidden;
+            background-color: var(--sf-primary);
+        }
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            z-index: 0;
+        }
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 58, 138, 0.78) 50%, rgba(30, 41, 59, 0.7) 100%);
+            z-index: 1;
+        }
+        .hero-fade-bottom {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 150px;
+            background: linear-gradient(to bottom, transparent 0%, var(--sf-bg) 100%);
+            z-index: 2;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            color: white;
+        }
+        .hero-subtitle {
+            color: var(--sf-yellow);
+            font-weight: 600;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+        .hero h1 .highlight { color: var(--sf-yellow); }
+        .hero p {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 2rem;
+            max-width: 620px;
+            line-height: 1.7;
+        }
+        .hero .check-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.85);
+        }
+        .hero .check-item i { color: var(--sf-yellow); }
+
+        /* --- Section Titles --- */
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--sf-primary);
+            margin-bottom: 1rem;
+        }
+        .section-title h2 span { color: var(--sf-accent); }
+        .section-title p {
+            color: var(--sf-text-muted);
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+        .section-title .divider {
+            width: 60px;
+            height: 3px;
+            background: var(--sf-accent);
+            margin: 1.5rem auto;
+            border-radius: 2px;
+        }
+
+        /* --- Productos Destacados --- */
+        .product-card-rotator {
+            background: var(--sf-card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+            transition: all 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--sf-border);
+        }
+        .product-card-rotator:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            border-color: var(--sf-accent);
+        }
+        .rotator-window {
+            height: 240px;
+            overflow: hidden;
+            position: relative;
+            background-color: var(--sf-primary);
+        }
+        .rotator-track {
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.8s ease-in-out;
+            height: 100%;
+        }
+        .rotator-item {
+            min-height: 240px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--sf-primary);
+            color: white;
+            font-weight: 600;
+            font-size: 1.1rem;
+            position: relative;
+        }
+        .rotator-item:nth-child(2) { background-color: var(--sf-primary-light); }
+        .rotator-item:nth-child(3) { background-color: var(--sf-accent); }
+        .rotator-item span {
+            position: relative;
+            z-index: 2;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        .product-info {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .product-info h3 {
+            font-size: 1.2rem;
+            color: var(--sf-primary);
+            margin-bottom: 0.75rem;
+            font-weight: 700;
+        }
+        .product-info p {
+            color: var(--sf-text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+            line-height: 1.6;
+        }
+        .product-info .link {
+            color: var(--sf-accent);
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: gap 0.3s ease;
+            font-size: 0.9rem;
+        }
+        .product-info .link:hover { gap: 15px; }
+
+        /* --- Servicios --- */
+        .service-card {
+            background: var(--sf-card-bg);
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+            transition: all 0.3s ease;
+            height: 100%;
+            border: 1px solid var(--sf-border);
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            border-color: var(--sf-accent);
+        }
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--sf-primary);
+            color: white;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            margin: 0 auto 1.5rem;
+            transition: all 0.3s ease;
+        }
+        .service-card:hover .service-icon {
+            background: var(--sf-accent);
+            transform: scale(1.05);
+        }
+        .service-card h4 {
+            font-size: 1.15rem;
+            color: var(--sf-primary);
+            margin-bottom: 0.75rem;
+            font-weight: 700;
+        }
+        .service-card p {
+            color: var(--sf-text-muted);
+            font-size: 0.9rem;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* --- Proyectos --- */
+        .projects-section {
+            background-color: var(--sf-bg);
+            padding: 6rem 0;
+            overflow: hidden;
+            border-top: 1px solid var(--sf-border);
+            border-bottom: 1px solid var(--sf-border);
+        }
+        .conveyor-belt {
+            display: flex;
+            gap: 1.5rem;
+            animation: scroll-left 40s linear infinite;
+            width: max-content;
+            padding: 1rem 0;
+        }
+        .conveyor-belt:hover { animation-play-state: paused; }
+        .project-card {
+            flex: 0 0 340px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            transition: all 0.3s ease;
+            position: relative;
+            cursor: pointer;
+            background: var(--sf-card-bg);
+        }
+        .project-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+        }
+        .project-card img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .project-card:hover img { transform: scale(1.08); }
+        .project-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(30,41,59,0.95), transparent);
+            padding: 2rem 1.5rem 1.5rem;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        .project-overlay h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+            font-weight: 700;
+        }
+        .project-overlay p {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            margin: 0;
+        }
+        .project-overlay .icon {
+            position: absolute;
+            top: -20px;
+            right: 20px;
+            background-color: var(--sf-accent);
+            color: white;
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.4);
+        }
+
+        @keyframes scroll-left {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* --- Footer --- */
+        .footer {
+            background-color: var(--sf-primary);
+            color: rgba(255,255,255,0.75);
+            padding: 4rem 0 2rem;
+        }
+        .footer h5 {
+            color: white;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.75rem;
+            font-weight: 700;
+        }
+        .footer h5::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 30px;
+            height: 2px;
+            background-color: var(--sf-accent);
+            border-radius: 2px;
+        }
+        .footer-brand {
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 1rem;
+        }
+        .footer-brand .brand-sf { color: white; }
+        .footer-brand .brand-aberturas { color: #F87171; }
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+        .footer-links li { margin-bottom: 0.75rem; }
+        .footer-links a {
+            color: rgba(255,255,255,0.65);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+        }
+        .footer-links a:hover {
+            color: var(--sf-accent);
+            padding-left: 5px;
+        }
+        .footer-contact li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+        .footer-contact li i {
+            color: var(--sf-accent);
+            margin-top: 4px;
+            width: 16px;
+        }
+        .social-links {
+            display: flex;
+            gap: 10px;
+            margin-top: 1rem;
+        }
+        .social-links a {
+            width: 38px;
+            height: 38px;
+            background-color: rgba(255,255,255,0.08);
+            color: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        .social-links a:hover {
+            background-color: var(--sf-accent);
+            transform: translateY(-2px);
+        }
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.08);
+            padding-top: 2rem;
+            margin-top: 3rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.4);
+        }
+
+        /* --- Responsive --- */
+        @media (max-width: 991px) {
+            .hero h1 { font-size: 2.8rem; }
+            .hero { padding: 8rem 0 6rem; }
+        }
+        @media (max-width: 767px) {
+            .hero h1 { font-size: 2.2rem; }
+            .hero { padding: 7rem 0 5rem; }
+            .section-title h2 { font-size: 1.8rem; }
+            .project-card { flex: 0 0 280px; }
+            .navbar-brand { font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <span class="brand-sf">SF</span>
+                <span class="brand-aberturas">Aberturas</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="#">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Productos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Servicios</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Nosotros</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Proyectos</a></li>
+                </ul>
+                <a href="#" class="btn btn-sf-accent">Pedir Presupuesto</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== HERO CON IMAGEN LOCAL ===== -->
+    <section class="hero">
+        <!-- 👇 ACÁ VA TU IMAGEN LOCAL -->
+        <img src="img/collage-proyectos.jpg" alt="Proyectos SF Aberturas" class="hero-bg">
+        <div class="hero-overlay"></div>
+        <div class="hero-fade-bottom"></div>
+        
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 hero-content">
+                    <div class="hero-subtitle">Aluminio y Vidrios San Francisco</div>
+                    <h1>Soluciones en <span class="highlight">aluminio y vidrio</span> para tu espacio</h1>
+                    <p>Fabricación e instalación de aberturas de aluminio, vidrios templados, mamparas, cerramientos y más. Más de dos décadas transformando espacios en Encarnación y la región.</p>
+                    <div class="d-flex flex-wrap gap-3 mb-4">
+                        <a href="#" class="btn btn-sf-accent btn-lg">Ver Productos</a>
+                        <a href="#" class="btn btn-sf-outline-light btn-lg">Contactanos</a>
+                    </div>
+                    <div class="d-flex gap-4 flex-wrap">
+                        <div class="check-item"><i class="fas fa-check-circle"></i><span>Asesoramiento sin costo</span></div>
+                        <div class="check-item"><i class="fas fa-check-circle"></i><span>Instalación profesional</span></div>
+                        <div class="check-item"><i class="fas fa-check-circle"></i><span>Garantía de calidad</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PRODUCTOS DESTACADOS ===== -->
+    <section class="py-5" style="padding-top: 6rem !important; padding-bottom: 6rem !important;">
+        <div class="container">
+            <div class="section-title">
+                <h2>Productos <span>destacados</span></h2>
+                <div class="divider"></div>
+                <p>Las categorías más elegidas, fabricadas a medida con materiales de primera calidad y terminaciones de excelencia.</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="product-card-rotator">
+                        <div class="rotator-window">
+                            <div class="rotator-track" id="rotator-1">
+                                <div class="rotator-item"><span>Ventanas Corredizas</span></div>
+                                <div class="rotator-item"><span>Ventanas Batientes</span></div>
+                                <div class="rotator-item"><span>Ventanas Proyectantes</span></div>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <h3>Ventanas</h3>
+                            <p>Ventanas corredizas, batientes y de alta prestación con aislamiento térmico y acústico.</p>
+                            <a href="#" class="link">Consultar sin compromiso <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="product-card-rotator">
+                        <div class="rotator-window">
+                            <div class="rotator-track" id="rotator-2">
+                                <div class="rotator-item"><span>Puertas de Aluminio</span></div>
+                                <div class="rotator-item"><span>Puertas de Vidrio</span></div>
+                                <div class="rotator-item"><span>Puertas Templadas</span></div>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <h3>Puertas</h3>
+                            <p>Puertas de aluminio y vidrio templado, seguras y elegantes para interior y exterior.</p>
+                            <a href="#" class="link">Consultar sin compromiso <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="product-card-rotator">
+                        <div class="rotator-window">
+                            <div class="rotator-track" id="rotator-3">
+                                <div class="rotator-item"><span>Mamparas de Baño</span></div>
+                                <div class="rotator-item"><span>Mamparas de Oficina</span></div>
+                                <div class="rotator-item"><span>Mamparas a Medida</span></div>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <h3>Mamparas</h3>
+                            <p>Mamparas para baño y oficina, con vidrio templado y perfiles de aluminio anodizado.</p>
+                            <a href="#" class="link">Consultar sin compromiso <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="product-card-rotator">
+                        <div class="rotator-window">
+                            <div class="rotator-track" id="rotator-4">
+                                <div class="rotator-item"><span>Cerramientos de Balcón</span></div>
+                                <div class="rotator-item"><span>Cerramientos de Galería</span></div>
+                                <div class="rotator-item"><span>Quinchos y Terrazas</span></div>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <h3>Cerramientos</h3>
+                            <p>Cerramientos de balcones, galerías y quinchos que amplían tu espacio con luz natural.</p>
+                            <a href="#" class="link">Consultar sin compromiso <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-5">
+                <a href="#" class="btn btn-sf-primary btn-lg">
+                    Ver catálogo completo <i class="fas fa-arrow-right ms-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SERVICIOS ===== -->
+    <section class="py-5" style="background-color: #F1F5F9; padding: 6rem 0 !important;">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nuestros <span>servicios</span></h2>
+                <div class="divider"></div>
+                <p>Acompañamos tu proyecto de principio a fin, desde la medición hasta la instalación y el postventa.</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-industry"></i></div>
+                        <h4>Fabricación</h4>
+                        <p>Fabricación a medida en taller propio con perfiles de primera línea y control de calidad en cada etapa.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-tools"></i></div>
+                        <h4>Instalación</h4>
+                        <p>Instalación profesional por equipo especializado, respetando tiempos y dejando el espacio impecable.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-comments"></i></div>
+                        <h4>Asesoramiento</h4>
+                        <p>Te asesoramos para elegir la mejor abertura según tu espacio, orientación y presupuesto.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="service-card">
+                        <div class="service-icon"><i class="fas fa-shield-alt"></i></div>
+                        <h4>Mantenimiento</h4>
+                        <p>Servicio de mantenimiento preventivo y correctivo para prolongar la vida útil de tus aberturas.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PROYECTOS ===== -->
+    <section class="projects-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Proyectos <span>realizados</span></h2>
+                <div class="divider"></div>
+                <p>Algunos de nuestros trabajos finalizados en Encarnación y alrededores. Pasá el mouse para pausar.</p>
+            </div>
+        </div>
+        <div class="conveyor-belt" id="conveyorBelt">
+            <div class="project-card">
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&h=400&fit=crop" alt="Proyecto 1">
+                <div class="project-overlay"><div class="icon"><i class="fas fa-expand"></i></div><h4>Ventanal Panorámico</h4><p>Residencia en Encarnación</p></div>
+            </div>
+            <div class="project-card">
+                <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&h=400&fit=crop" alt="Proyecto 2">
+                <div class="project-overlay"><div class="icon"><i class="fas fa-expand"></i></div><h4>Mampara de Baño</h4><p>Departamento en Asunción</p></div>
+            </div>
+            <div class="project-card">
+                <img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=600&h=400&fit=crop" alt="Proyecto 3">
+                <div class="project-overlay"><div class="icon"><i class="fas fa-expand"></i></div><h4>Cerramiento de Galería</h4><p>Quincho en Mita Rogá</p></div>
+            </div>
+            <div class="project-card">
+                <img src="https://images.unsplash.com/photo-1600573472550-8090b5e0745e?w=600&h=400&fit=crop" alt="Proyecto 4">
+                <div class="project-overlay"><div class="icon"><i class="fas fa-expand"></i></div><h4>Puerta de Aluminio</h4><p>Local comercial en Encarnación</p></div>
+            </div>
+            <!-- Duplicados -->
+            <div class="project-card">
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&h=400&fit=crop" alt="Proyecto 1">
+                <div class="project-overlay"><div class="icon"><i class="fas fa-expand"></i></div><h4>Ventanal Panorámico</h4><p>Residencia en Encarnación</p></div>
+            </div>
+            <div class="project-card">
+                <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&h=400&fit=crop" alt="Proyecto 2">
+                <div class="project-overlay"><div class="icon"><i class="fas fa-expand"></i></div><h4>Mampara de Baño</h4><p>Departamento en Asunción</p></div>
+            </div>
+            <div class="project-card">
+                <img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=600&h=400&fit=crop" alt="Proyecto 3">
+                <div class="project-overlay"><div class="icon"><i class="fas fa-expand"></i></div><h4>Cerramiento de Galería</h4><p>Quincho en Mita Rogá</p></div>
+            </div>
+            <div class="project-card">
+                <img src="https://images.unsplash.com/photo-1600573472550-8090b5e0745e?w=600&h=400&fit=crop" alt="Proyecto 4">
+                <div class="project-overlay"><div class="icon"><i class="fas fa-expand"></i></div><h4>Puerta de Aluminio</h4><p>Local comercial en Encarnación</p></div>
+            </div>
+        </div>
+        <div class="container text-center mt-5">
+            <a href="#" class="btn btn-sf-outline btn-lg">
+                Ver todos los proyectos <i class="fas fa-arrow-right ms-2"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="footer-brand">
+                        <span class="brand-sf">SF</span>
+                        <span class="brand-aberturas">Aberturas</span>
+                    </div>
+                    <p style="font-size: 0.95rem; line-height: 1.7;">Instalación de aberturas de aluminio y vidrio en Paraguay. Calidad y confianza para tu hogar o empresa.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <h5>Contacto</h5>
+                    <ul class="footer-contact list-unstyled">
+                        <li><i class="fas fa-phone"></i> <span>+595 981 000 000</span></li>
+                        <li><i class="fas fa-envelope"></i> <span>contacto@sfaberturas.com.py</span></li>
+                        <li><i class="fas fa-map-marker-alt"></i> <span>Encarnación, Paraguay</span></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <h5>Navegación</h5>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-chevron-right" style="font-size: 0.6rem;"></i> Inicio</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right" style="font-size: 0.6rem;"></i> Catálogo</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right" style="font-size: 0.6rem;"></i> Proyectos</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right" style="font-size: 0.6rem;"></i> Nosotros</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right" style="font-size: 0.6rem;"></i> Pedir presupuesto</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <h5>Horarios de atención</h5>
+                    <ul class="footer-contact list-unstyled">
+                        <li><i class="fas fa-clock"></i> <span>Lunes a Viernes: 07:00 - 17:00</span></li>
+                        <li><i class="fas fa-clock"></i> <span>Sábados: 07:00 - 12:00</span></li>
+                    </ul>
+                    <a href="#" class="btn btn-sf-accent mt-3 w-100">
+                        <i class="fas fa-file-invoice me-2"></i>Solicitar presupuesto
+                    </a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="mb-0">© 2025 SF Aberturas. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function setupRotator(id, interval) {
+            const track = document.getElementById(id);
+            if (!track) return;
+            const items = track.children.length;
+            let currentIndex = 0;
+            setInterval(() => {
+                currentIndex = (currentIndex + 1) % items;
+                track.style.transform = `translateY(-${currentIndex * 100}%)`;
+            }, interval);
+        }
+        setupRotator('rotator-1', 3000);
+        setupRotator('rotator-2', 3500);
+        setupRotator('rotator-3', 4000);
+        setupRotator('rotator-4', 4500);
+
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.boxShadow = '0 4px 20px rgba(0,0,0,0.06)';
+                navbar.style.padding = '0.6rem 0';
+            } else {
+                navbar.style.boxShadow = 'none';
+                navbar.style.padding = '1rem 0';
+            }
+        });
+    </script>
+</body>
+</html>
